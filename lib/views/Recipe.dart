@@ -1,10 +1,10 @@
-/* import 'package:flutter/material.dart';
-import 'package:recipeapp/models/model_allrecipes.dart'; // Importar o modelo necessário
+import 'package:flutter/material.dart';
+import 'package:recipeapp/models/model_allrecipes.dart';
 
-class RecipeDetailsScreen extends StatelessWidget {
+class RecipeScreen extends StatelessWidget {
   final Data recipeData;
 
-  const RecipeDetailsScreen({Key? key, required this.recipeData}) : super(key: key);
+  const RecipeScreen({Key? key, required this.recipeData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,47 +13,38 @@ class RecipeDetailsScreen extends StatelessWidget {
         title: Text(recipeData.title ?? 'Detalhes da Receita'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              recipeData.title ?? 'Título da Receita',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              recipeData.title ?? 'Nome da Receita Indisponível',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
             Text(
-              'Ingredientes:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              "Ingredientes:",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
-            if (recipeData.ingredients != null)
+            // Exibir os ingredientes
+            if (recipeData.ingredients != null && recipeData.ingredients!.isNotEmpty)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: recipeData.ingredients!.map((ingredient) {
                   return Text(
-                    '- $ingredient',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                    ingredient,
+                    style: TextStyle(fontSize: 18),
                   );
                 }).toList(),
               ),
             SizedBox(height: 16),
             Text(
-              'Passos:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              "Modo de Preparo:",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
+            // Exibir as etapas
             if (recipeData.recipe != null && recipeData.recipe!.steps != null)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,19 +52,16 @@ class RecipeDetailsScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (step.text != null)
-                        Text(
-                          step.text!,
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
                       if (step.image != null)
                         Image.network(
                           step.image!,
-                          width: double.infinity,
+                          width: MediaQuery.of(context).size.width,
                           fit: BoxFit.cover,
                         ),
+                      Text(
+                        step.text ?? '',
+                        style: TextStyle(fontSize: 18),
+                      ),
                       SizedBox(height: 16),
                     ],
                   );
@@ -85,4 +73,3 @@ class RecipeDetailsScreen extends StatelessWidget {
     );
   }
 }
- */

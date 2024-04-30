@@ -35,6 +35,10 @@ class Data {
     }
   }
 
+  get recipe => null;
+
+  get ingredients => null;
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['title'] = this.title;
